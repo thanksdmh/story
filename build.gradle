@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        maven { url 'http://10.79.1.169:8081/nexus/content/groups/android_all/' }
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'me.tatarka:gradle-retrolambda:3.7.0'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+
+}
+ext {
+    applicationId = "com.dmh.story"
+    compileSdkVersion = 26
+    supportLibVersion = "25.3.1"
+    minSdkVersion = 19
+    javaVersion = JavaVersion.VERSION_1_8
+    targetSdkVersion = 26
+    versionCode = 20180103
+    versionName = "3.4.2"
+    abiFilters = "armeabi"
+    resConfigs = ["en", "zh"]
+
+
+    group = "com.dmh.story"
+    version = "3.6.0.d-SNAPSHOT"
+
+
+}
+
+allprojects {
+    repositories {
+        maven { url 'http://10.79.1.169:8081/nexus/content/groups/android_all/' }
+
+    }
+}
+
+subprojects {
+    if (project.name != 'app') {
+        apply from: '../repo.gradle'
+        group = rootProject.ext.group
+        version = rootProject.ext.version
+    }
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
