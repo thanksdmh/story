@@ -6,14 +6,16 @@ package com.dmh.app.view.bean
  */
 class Story {
     companion object {
+        /*加载更多*/
+        const val LOAD_MORE = -1
         /*无图片仅仅只有标题*/
         const val SIMPLE = 1
         /*简介前有图片开始*/
         const val ONE_PIC_START = 2
         /*简介前后有一张图片*/
-        val ONE_PIC_END = 3
+        const val ONE_PIC_END = 3
         /*有超过两张图片在文章简介下*/
-        val MORE_PIC_BELOWN = 4
+        const val MORE_PIC_BELOWN = 4
     }
 
     //类型

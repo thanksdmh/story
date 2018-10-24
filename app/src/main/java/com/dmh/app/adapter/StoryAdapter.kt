@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dmh.app.R
 import com.dmh.app.adapter.holder.BaseHolder
+import com.dmh.app.adapter.holder.LoadMoreHolder
 import com.dmh.app.adapter.holder.OnePicHolder
 import com.dmh.app.adapter.holder.SimpleHolder
 import com.dmh.app.view.bean.Story
@@ -16,10 +17,26 @@ import com.dmh.app.view.bean.Story
  *@author deng
  *@date 2018/10/21 0021.
  */
-class StoryAdapter(private var list: List<Story>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    override fun getItemViewType(position: Int): Int {
+        return list[position].type
+    }
+
+    override fun getItemCount(): Int {
+        return list.size
+    }
+
+    fun addMore(data: List<Story>) {
+        list.addAll(data)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
+            Story.LOAD_MORE -> {
+                val view = LayoutInflater.from(parent?.context).inflate(R.layout.load_more_item, parent, false)
+                return LoadMoreHolder(view)
+            }
 
             Story.SIMPLE -> {
                 val view = LayoutInflater.from(parent?.context).inflate(R.layout.simple_item, parent, false)
@@ -38,13 +55,6 @@ class StoryAdapter(private var list: List<Story>) : RecyclerView.Adapter<Recycle
 
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return list[position].type
-    }
-
-    override fun getItemCount(): Int {
-        return list.size
-    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         val story = list[position]
