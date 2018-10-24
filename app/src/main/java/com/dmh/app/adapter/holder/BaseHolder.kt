@@ -9,6 +9,7 @@ import com.dmh.app.R
  *@author deng
  *@date 2018/10/22 0022.
  */
-open class BaseHolder(itemView: View?) : RecyclerView.ViewHolder(itemView){
+open class BaseHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     var titleView: TextView? = itemView?.findViewById(R.id.tv_title)
+    var contentView: TextView? = itemView?.findViewById(R.id.tv_content)
 }

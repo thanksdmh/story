@@ -18,6 +18,12 @@ import com.dmh.app.view.bean.Story
  *@date 2018/10/21 0021.
  */
 class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var itemClickListener: OnItemClickListener? = null
+
+    fun setItemClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
+    }
+
     override fun getItemViewType(position: Int): Int {
         return list[position].type
     }
@@ -63,6 +69,12 @@ class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<Re
         }
         if (holder is BaseHolder) {
             holder.titleView!!.text = story.title
+            if(holder.contentView!=null) {
+                holder.contentView!!.text = story.content
+            }
+            holder.itemView.setOnClickListener({
+                itemClickListener?.onItemClick(story)
+            })
         }
         when (holder) {
             is OnePicHolder -> {
@@ -77,6 +89,10 @@ class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<Re
         }
 
 
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(item: Story)
     }
 
 

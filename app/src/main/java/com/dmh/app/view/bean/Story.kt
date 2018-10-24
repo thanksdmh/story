@@ -1,10 +1,12 @@
 package com.dmh.app.view.bean
 
+import java.io.Serializable
+
 /**
  *@author deng
  *@date 2018/10/21 0021.
  */
-class Story {
+class Story :Serializable {
     companion object {
         /*加载更多*/
         const val LOAD_MORE = -1
