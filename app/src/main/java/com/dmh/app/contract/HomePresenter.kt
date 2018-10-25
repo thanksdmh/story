@@ -7,7 +7,7 @@ import java.util.*
  *@author deng
  *@date 2018/10/24 0024.
  */
-class HomeContactPresenter(view: IHomeContact.IHomeView) : IHomeContact {
+class HomePresenter(view: IHomeContact.IHomeView) : BasePresenter<IHomeContact.IHomeView>(), IHomeContact {
     private val mView = view
 
     override fun queryMore() {

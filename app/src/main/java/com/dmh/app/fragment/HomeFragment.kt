@@ -3,13 +3,12 @@ package com.dmh.app.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.dmh.app.DetailActivity
 import com.dmh.app.R
 import com.dmh.app.adapter.RefreshLoadMoreListener
 import com.dmh.app.adapter.StoryAdapter
+import com.dmh.app.contract.HomePresenter
 import com.dmh.app.contract.IHomeContact
 import com.dmh.app.view.bean.Story
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -18,7 +17,13 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * 首页列表
  * Created by dengmaohua on 2018/10/23 16:18.
  */
-class HomeFragment : BaseFragment(), IHomeContact.IHomeView {
+class HomeFragment : BaseFragment<IHomeContact.IHomeView, HomePresenter>(), IHomeContact.IHomeView {
+
+
+    override fun createPresenter(): HomePresenter {
+        return HomePresenter(this)
+    }
+
     private var adapter: StoryAdapter? = null
     override fun onLoadMore(data: ArrayList<Story>) {
         adapter!!.addMore(data)
@@ -33,15 +38,6 @@ class HomeFragment : BaseFragment(), IHomeContact.IHomeView {
         })
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
-        return if (inflater != null) {
-            inflater.inflate(R.layout.fragment_home, container, false)
-        } else {
-            super.onCreateView(inflater, container, savedInstanceState)
-        }
-    }
-
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
@@ -54,6 +50,14 @@ class HomeFragment : BaseFragment(), IHomeContact.IHomeView {
 
             }
         })
+    }
+
+    override fun getTitle(): String {
+        return getString(R.string.menu_home)
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_home
     }
 
     fun jumpToDetail(item: Story) {

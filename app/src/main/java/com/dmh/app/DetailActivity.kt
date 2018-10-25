@@ -1,6 +1,7 @@
 package com.dmh.app
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.dmh.app.view.bean.Story
 import kotlinx.android.synthetic.main.activity_detail.*
 
@@ -8,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
  * 文章详情界面
  * Created by dengmaohua on 2018/10/23 16:16.
  */
-class DetailActivity : BaseActivity() {
+class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)

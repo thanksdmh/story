@@ -7,7 +7,7 @@ import com.dmh.app.view.bean.Story
  *@date 2018/10/24 0024.
  */
 interface IHomeContact {
-    interface IHomeView {
+    interface IHomeView : BaseView {
         fun onLoad(data: ArrayList<Story>)
         fun onLoadMore(data: ArrayList<Story>)
     }
