@@ -18,16 +18,41 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * Created by dengmaohua on 2018/10/23 16:18.
  */
 class HomeFragment : BaseFragment<IHomeContact.IHomeView, HomePresenter>(), IHomeContact.IHomeView {
+    private var adapter: StoryAdapter? = null
+    private var title: String? = ""
 
+    companion object {// 包裹范围内 属于静态方法
+
+        fun newInstance(title: String): BaseFragment<*, *> {
+
+            val args = Bundle()
+            args.putString("title", title)
+            val fragment = HomeFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        title = arguments.getString("title")
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+        mPresenter?.query()
+    }
 
     override fun createPresenter(): HomePresenter {
         return HomePresenter(this)
     }
 
-    private var adapter: StoryAdapter? = null
+
     override fun onLoadMore(data: ArrayList<Story>) {
         adapter!!.addMore(data)
     }
+
 
     override fun onLoad(data: ArrayList<Story>) {
         adapter = StoryAdapter(data)
@@ -36,12 +61,9 @@ class HomeFragment : BaseFragment<IHomeContact.IHomeView, HomePresenter>(), IHom
                 jumpToDetail(item)
             }
         })
+        recyclerView.adapter = adapter;
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        init()
-    }
 
     private fun init() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -53,7 +75,7 @@ class HomeFragment : BaseFragment<IHomeContact.IHomeView, HomePresenter>(), IHom
     }
 
     override fun getTitle(): String {
-        return getString(R.string.menu_home)
+        return title.toString()
     }
 
     override fun getLayoutId(): Int {

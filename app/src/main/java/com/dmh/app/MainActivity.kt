@@ -7,8 +7,6 @@ package com.dmh.app
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.dmh.app.adapter.MainAdapter
-import com.dmh.app.contract.BasePresenter
-import com.dmh.app.contract.BaseView
 import com.dmh.app.fragment.BaseFragment
 import com.dmh.app.fragment.FavorFragment
 import com.dmh.app.fragment.HomeFragment
@@ -24,18 +22,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewpager() {
-        var fragments = ArrayList<BaseFragment<BaseView, BasePresenter<BaseView>>>()
+        var fragments = ArrayList<BaseFragment<*, *>>()
         //首页
-        fragments.add(HomeFragment())
+        fragments.add(HomeFragment.newInstance(getString(R.string.menu_home)))
         //关注页
         fragments.add(FavorFragment())
         //个人中心
         fragments.add(MineFragment())
-        main_viewpager.adapter = MainAdapter(supportFragmentManager, fragments)
         tab_layout.setupWithViewPager(main_viewpager)
+        main_viewpager.adapter = MainAdapter(supportFragmentManager, fragments)
+
 
     }
-
 
 
 }

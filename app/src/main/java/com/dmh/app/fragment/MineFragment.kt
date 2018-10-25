@@ -17,7 +17,8 @@ class MineFragment : BaseFragment<IMineContact.IMineView, MinePresenter>(), IMin
     }
 
     override fun getTitle(): String {
-        return getString(R.string.menu_mine)
+        return if (isAdded) getString(R.string.menu_mine)
+        else super.getTitle()
     }
 
     override fun getLayoutId(): Int {

@@ -9,9 +9,10 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:tabGravity="center"
+        android:layout_alignParentBottom="true"
+        app:tabGravity="fill"
         app:tabIndicatorColor="#FF995B"
-        app:tabMode="scrollable"
+        app:tabMode="fixed"
         app:tabSelectedTextColor="#FF995B"
         app:tabTextColor="#9A9A9A"/>
 

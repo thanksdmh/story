@@ -38,6 +38,8 @@ abstract class BaseFragment<V : BaseView, P : BasePresenter<V>?> : Fragment() {
         return "标题"
     }
 
+
+
     abstract fun getLayoutId(): Int
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

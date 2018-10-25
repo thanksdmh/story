@@ -14,7 +14,10 @@ class FavorFragment : BaseFragment<IFavorContact.IFavorView, FavorPresenter>(), 
     }
 
     override fun getTitle(): String {
-        return getString(R.string.menu_favor)
+//        return activity.getString(R.string.menu_favor)
+        return if (isAdded)
+            activity.getString(R.string.menu_favor)
+        else super.getTitle()
     }
 
     override fun getLayoutId(): Int {
