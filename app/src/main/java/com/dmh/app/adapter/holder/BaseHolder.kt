@@ -6,7 +6,7 @@ import android.widget.TextView
 import com.dmh.app.R
 
 /**
- *@author deng
+ *@Author deng
  *@date 2018/10/22 0022.
  */
 open class BaseHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {

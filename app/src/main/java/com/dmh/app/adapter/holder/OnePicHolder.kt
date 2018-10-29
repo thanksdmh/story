@@ -5,7 +5,7 @@ import android.widget.ImageView
 import com.dmh.app.R
 
 /**
- *@author deng
+ *@Author deng
  *@date 2018/10/22 0022.
  */
 class OnePicHolder(itemView: View?) : BaseHolder(itemView) {

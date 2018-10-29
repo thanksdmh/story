@@ -4,7 +4,7 @@ import com.dmh.app.view.bean.Story
 import java.util.*
 
 /**
- *@author deng
+ *@Author deng
  *@date 2018/10/24 0024.
  */
 class HomePresenter(view: IHomeContact.IHomeView) : BasePresenter<IHomeContact.IHomeView>(), IHomeContact {

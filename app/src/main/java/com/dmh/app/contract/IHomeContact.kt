@@ -3,7 +3,7 @@ package com.dmh.app.contract
 import com.dmh.app.view.bean.Story
 
 /**
- *@author deng
+ *@Author deng
  *@date 2018/10/24 0024.
  */
 interface IHomeContact {

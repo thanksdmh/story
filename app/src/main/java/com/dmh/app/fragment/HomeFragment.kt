@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment<IHomeContact.IHomeView, HomePresenter>(), IHom
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        title = arguments.getString("title")
+//        title = arguments.getString("title")
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

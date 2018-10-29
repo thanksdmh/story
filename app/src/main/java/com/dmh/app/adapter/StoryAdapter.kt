@@ -14,7 +14,7 @@ import com.dmh.app.view.bean.Story
 
 
 /**
- *@author deng
+ *@Author deng
  *@date 2018/10/21 0021.
  */
 class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -40,20 +40,20 @@ class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<Re
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
             Story.LOAD_MORE -> {
-                val view = LayoutInflater.from(parent?.context).inflate(R.layout.load_more_item, parent, false)
+                val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_load_more, parent, false)
                 return LoadMoreHolder(view)
             }
 
             Story.SIMPLE -> {
-                val view = LayoutInflater.from(parent?.context).inflate(R.layout.simple_item, parent, false)
+                val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_simple, parent, false)
                 return SimpleHolder(view)
             }
             Story.ONE_PIC_START -> {
-                val view = LayoutInflater.from(parent?.context).inflate(R.layout.one_pic_item, parent, false)
+                val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_one_pic, parent, false)
                 return OnePicHolder(view)
             }
             else -> {
-                val view = LayoutInflater.from(parent?.context).inflate(R.layout.simple_item, parent, false)
+                val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_simple, parent, false)
                 return SimpleHolder(view)
             }
 
@@ -69,7 +69,7 @@ class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<Re
         }
         if (holder is BaseHolder) {
             holder.titleView!!.text = story.title
-            if(holder.contentView!=null) {
+            if (holder.contentView != null) {
                 holder.contentView!!.text = story.content
             }
             holder.itemView.setOnClickListener({

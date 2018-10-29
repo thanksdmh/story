@@ -3,10 +3,10 @@ package com.dmh.app.view.bean
 import java.io.Serializable
 
 /**
- *@author deng
+ *@Author deng
  *@date 2018/10/21 0021.
  */
-class Story :Serializable {
+class Story : Serializable {
     companion object {
         /*加载更多*/
         const val LOAD_MORE = -1
@@ -32,4 +32,7 @@ class Story :Serializable {
     var introduce: String? = ""
     /*图片地址*/
     var picUrlList: ArrayList<String>? = null
+
+    /*内容类型 1 幽默 2 冷笑话 3 故事 4 散文 等等*/
+    var contentType: Int = 0
 }
