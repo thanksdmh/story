@@ -13,10 +13,6 @@ class MainAdapter(fm: FragmentManager, list: ArrayList<BaseFragment<*, *>>?) : F
     }
 
     var list = list
-    fun setFraments(list: ArrayList<BaseFragment<*, *>>) {
-        this.list = list
-        notifyDataSetChanged()
-    }
 
     override fun getCount(): Int {
         return if (list == null) {

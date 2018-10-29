@@ -24,14 +24,17 @@ class MainActivity : AppCompatActivity() {
     private fun initViewpager() {
         var fragments = ArrayList<BaseFragment<*, *>>()
         //首页
-        fragments.add(HomeFragment.newInstance(getString(R.string.menu_home)))
+        fragments.add(HomeFragment())
         //关注页
         fragments.add(FavorFragment())
         //个人中心
         fragments.add(MineFragment())
-        tab_layout.setupWithViewPager(main_viewpager)
-        main_viewpager.adapter = MainAdapter(supportFragmentManager, fragments)
 
+        main_viewpager.adapter = MainAdapter(supportFragmentManager, fragments)
+        tab_layout.setupWithViewPager(main_viewpager)
+        tab_layout.getTabAt(0)?.text = getString(R.string.menu_home)
+        tab_layout.getTabAt(1)?.text = getString(R.string.menu_favor)
+        tab_layout.getTabAt(2)?.text = getString(R.string.menu_mine)
 
     }
 
