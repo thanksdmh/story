@@ -7,4 +7,6 @@
     <string name="menu_mine">个人中心</string>
     <string name="menu_home_ymo">幽默</string>
     <string name="menu_home_lxh">冷笑话</string>
+    <string name="menu_favor_my">我关注的</string>
+    <string name="menu_favor_other">关注我的</string>
 </resources>

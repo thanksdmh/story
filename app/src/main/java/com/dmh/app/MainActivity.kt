@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Window
 import android.view.WindowManager
 import com.dmh.app.adapter.MainAdapter
-import com.dmh.app.fragment.FavorFragment
+import com.dmh.app.fragment.FragmentFactory
 import com.dmh.app.fragment.HomeFragment
 import com.dmh.app.fragment.MineFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,10 +30,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewpager() {
         var fragments = ArrayList<Fragment>()
+        var homeFragment = HomeFragment()
+        homeFragment.fragments = FragmentFactory.getHomeFragments()
+        var titles = ArrayList<String>()
+        titles.add(getString(R.string.menu_home_ymo))
+        titles.add(getString(R.string.menu_home_lxh))
+        homeFragment.titles = titles
         //首页
-        fragments.add(HomeFragment())
+        fragments.add(homeFragment)
+        homeFragment = HomeFragment()
+        homeFragment.fragments = FragmentFactory.getAuthorFragments()
+        titles = ArrayList()
+        titles.add(getString(R.string.menu_favor_my))
+        titles.add(getString(R.string.menu_favor_other))
+        homeFragment.titles = titles
         //关注页
-        fragments.add(FavorFragment())
+        fragments.add(homeFragment)
         //个人中心
         fragments.add(MineFragment())
         main_viewpager.offscreenPageLimit = 3
