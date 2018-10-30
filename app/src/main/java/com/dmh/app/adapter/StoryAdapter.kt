@@ -37,6 +37,13 @@ class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<Re
         notifyDataSetChanged()
     }
 
+    fun showLoadingMore() {
+        var story = Story()
+        story.type = Story.LOAD_MORE
+        list.add(story)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
             Story.LOAD_MORE -> {

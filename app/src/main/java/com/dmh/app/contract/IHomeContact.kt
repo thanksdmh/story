@@ -10,6 +10,7 @@ interface IHomeContact {
     interface IHomeView : BaseView {
         fun onLoad(data: ArrayList<Story>)
         fun onLoadMore(data: ArrayList<Story>)
+        fun onFailed(msg: String)
     }
 
     /*查询接口获取数据*/
