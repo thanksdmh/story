@@ -39,6 +39,7 @@ class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<Re
 
     fun showLoadingMore() {
         var story = Story()
+        story.title = "加载中"
         story.type = Story.LOAD_MORE
         list.add(story)
         notifyDataSetChanged()

@@ -5,5 +5,5 @@ package com.dmh.app.module
  */
 interface IStoryModel<T> {
 
-    fun query(listener: QueryListener<T>)
+    fun query(type: Int, listener: QueryListener<T>)
 }

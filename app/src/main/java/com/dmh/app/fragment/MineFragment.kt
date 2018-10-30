@@ -11,15 +11,12 @@ import com.dmh.app.contract.MinePresenter
  * 喜欢的作者
  * 我的文章
  */
-class MineFragment : BaseFragment<IMineContact.IMineView, MinePresenter>(), IMineContact.IMineView {
+class MineFragment : BaseContactFragment<IMineContact.IMineView, MinePresenter>(), IMineContact.IMineView {
     override fun createPresenter(): MinePresenter {
         return MinePresenter(this)
     }
 
-    override fun getTitle(): String {
-        return if (isAdded) getString(R.string.menu_mine)
-        else super.getTitle()
-    }
+
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_mine

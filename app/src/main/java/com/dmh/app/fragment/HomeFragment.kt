@@ -1,86 +1,41 @@
 package com.dmh.app.fragment
 
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.view.View
-import com.dmh.app.DetailActivity
+import android.support.v4.app.Fragment
 import com.dmh.app.R
-import com.dmh.app.adapter.RefreshLoadMoreListener
-import com.dmh.app.adapter.StoryAdapter
-import com.dmh.app.contract.HomePresenter
-import com.dmh.app.contract.IHomeContact
-import com.dmh.app.view.bean.Story
+import com.dmh.app.adapter.MainAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.experimental.launch
 
 /**
  * 首页列表
  * Created by dengmaohua on 2018/10/23 16:18.
  */
-class HomeFragment : BaseFragment<IHomeContact.IHomeView, HomePresenter>(), IHomeContact.IHomeView {
+class HomeFragment : BaseFragment() {
 
-    private var adapter: StoryAdapter? = null
-    private var title: String? = ""
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         init()
-        mPresenter?.query()
-    }
-
-    override fun createPresenter(): HomePresenter {
-        return HomePresenter(this)
     }
 
     private fun init() {
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.addOnScrollListener(object : RefreshLoadMoreListener() {
-            override fun onLoadMore() {
-                mPresenter?.queryMore()
-            }
-        })
+        var fragments = ArrayList<Fragment>()
+        //幽默
+        fragments.add(StoryListFragment())
+        var storyListFragment = StoryListFragment()
+        storyListFragment.mtype = 1
+        //冷笑话
+        fragments.add(storyListFragment)
+        home_viewpager.offscreenPageLimit = 3
+        home_viewpager.adapter = MainAdapter(childFragmentManager, fragments)
+        home_tab.setupWithViewPager(home_viewpager)
+        home_tab.getTabAt(0)?.text = getString(R.string.menu_home_ymo)
+        home_tab.getTabAt(1)?.text = getString(R.string.menu_home_lxh)
     }
 
-    override fun getTitle(): String {
-        return title.toString()
-    }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
     }
 
 
-    override fun onLoadMore(data: ArrayList<Story>) {
-        launch {
-            adapter!!.addMore(data)
-        }
-
-    }
-
-
-    override fun onLoad(data: ArrayList<Story>) {
-        launch {
-            adapter = StoryAdapter(data)
-            adapter!!.setItemClickListener(object : StoryAdapter.OnItemClickListener {
-                override fun onItemClick(item: Story) {
-                    jumpToDetail(item)
-                }
-            })
-            recyclerView.adapter = adapter
-        }
-
-    }
-
-    override fun onFailed(msg: String) {
-
-    }
-
-    fun jumpToDetail(item: Story) {
-        val intent = Intent(activity, DetailActivity().javaClass)
-        val b = Bundle()
-        b.putSerializable("item", item)
-        intent.putExtra("item", b)
-        startActivity(intent)
-    }
 }

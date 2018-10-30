@@ -14,7 +14,7 @@ class HomePresenter(view: IHomeContact.IHomeView) : BasePresenter<IHomeContact.I
 
     override fun queryMore() {
 
-        mStoryModel.query(object : QueryListener<Story> {
+        mStoryModel.query(mView.getType(), object : QueryListener<Story> {
             override fun onSuccess(data: ArrayList<Story>) {
                 mView.onLoadMore(data)
 
@@ -30,7 +30,7 @@ class HomePresenter(view: IHomeContact.IHomeView) : BasePresenter<IHomeContact.I
 
 
     override fun query() {
-        mStoryModel.query(object : QueryListener<Story> {
+        mStoryModel.query(mView.getType(), object : QueryListener<Story> {
             override fun onSuccess(data: ArrayList<Story>) {
                 mView.onLoad(data)
             }

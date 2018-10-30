@@ -6,7 +6,7 @@ import com.dmh.app.view.bean.Story
  * Created by dengmaohua on 2018/10/30 16:39.
  */
 class StoryModelImpl : IStoryModel<Story> {
-    override fun query(listener: QueryListener<Story>) {
+    override fun query(type: Int, listener: QueryListener<Story>) {
         val t = Thread({
             Thread.sleep(2000)
             println("C 使用 Lambda 表达式:${Thread.currentThread()}")
@@ -15,7 +15,7 @@ class StoryModelImpl : IStoryModel<Story> {
             for (i in 0 until 10) {
                 var story = Story()
                 story.title = "故事标题" + i
-                if (i % 2 == 0) {
+                if (i % 2 == 0 && type == 0) {
                     story.type = Story.ONE_PIC_START
                     story.picUrlList = ArrayList()
                     story.picUrlList!!.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540233941779&di=4dbaa17b29f3e66b63624fafde0583d3&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F060828381f30e92483987f3746086e061d95f7fc.jpg")
@@ -31,9 +31,6 @@ class StoryModelImpl : IStoryModel<Story> {
                 listener.onSuccess(list)
             }
         })
-//        t.isDaemon = false
-//        t.name = "CThread"
-//        t.priority = 3
         t.start()
     }
 

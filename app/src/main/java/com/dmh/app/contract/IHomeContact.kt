@@ -11,6 +11,7 @@ interface IHomeContact {
         fun onLoad(data: ArrayList<Story>)
         fun onLoadMore(data: ArrayList<Story>)
         fun onFailed(msg: String)
+        fun getType(): Int
     }
 
     /*查询接口获取数据*/

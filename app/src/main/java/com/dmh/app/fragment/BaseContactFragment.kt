@@ -1,23 +1,18 @@
-package com.dmh.app
+package com.dmh.app.fragment
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.view.Window
-import android.view.WindowManager
 import com.dmh.app.contract.BasePresenter
 import com.dmh.app.contract.BaseView
 
-
 /**
- * Created by dengmaohua on 2018/10/23 16:17.
+ * Created by dengmaohua on 2018/10/23 16:18.
  */
-abstract class BaseActivity<V : BaseView, P : BasePresenter<V>?> : AppCompatActivity() {
-
+abstract class BaseContactFragment<V : BaseView, P : BasePresenter<V>?> : BaseFragment() {
     var mPresenter: P? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         mPresenter = createPresenter()
         mPresenter?.attachView(this as V)
 
@@ -34,5 +29,6 @@ abstract class BaseActivity<V : BaseView, P : BasePresenter<V>?> : AppCompatActi
      * @return 创建的Presenter对象
      */
     protected abstract fun createPresenter(): P
+
 
 }
