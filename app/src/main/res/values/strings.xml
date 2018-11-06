@@ -9,4 +9,10 @@
     <string name="menu_home_lxh">冷笑话</string>
     <string name="menu_favor_my">我关注的</string>
     <string name="menu_favor_other">关注我的</string>
+    <string name="follow_me">关注我的</string>
+    <string name="comment_me">评论我的</string>
+    <string name="my_comment">我的评论</string>
+    <string name="my_share">我的分享</string>
+    <string name="my_love">我的点赞</string>
+    <string name="set">设置</string>
 </resources>
