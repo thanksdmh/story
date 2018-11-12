@@ -11,11 +11,11 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * Created by dengmaohua on 2018/10/23 16:18.
  */
 class HomeFragment : BaseFragment() {
-    public var fragments = ArrayList<Fragment>()
+    var fragments = ArrayList<Fragment>()
         set(value) {
             field = value
         }
-    public var titles = ArrayList<String>()
+    var titles = ArrayList<String>()
         set(value) {
             field = value
         }
