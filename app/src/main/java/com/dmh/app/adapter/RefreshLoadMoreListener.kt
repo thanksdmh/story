@@ -29,7 +29,7 @@ abstract class RefreshLoadMoreListener : RecyclerView.OnScrollListener() {
         val layoutManager = recyclerView.layoutManager
         val visibleItemCount = layoutManager.childCount
         val totalItemCount = layoutManager.itemCount
-        if (visibleItemCount > 0 && currentScrollState === RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition >= totalItemCount - 1) {
+        if (visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition >= totalItemCount - 1) {
             onLoadMore()
         }
     }
