@@ -5,7 +5,7 @@ stoy = Table('story', MetaData(),
              Column('sid', String(36), primary_key=True),
              Column('uid', String(36)),
              Column('story_context', String(2000)),
-             Column('contentType', Integer),
+             Column('content_type', Integer),
              Column('create_time', DATETIME),
              Column('time', Integer),
              Column('love', Integer)
@@ -17,7 +17,7 @@ class Story(object):
         self.sid = sid
         self.uid = uid
         self.story_context = context
-        self.contentType = contentType,
+        self.content_type = contentType,
         self.create_time = create_time,
         self.time = time
         self.love = love

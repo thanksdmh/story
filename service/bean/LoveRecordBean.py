@@ -13,7 +13,7 @@
 #   CONSTRAINT `FK_Reference_9` FOREIGN KEY (`sid`) REFERENCES `story` (`sid`) ON DELETE RESTRICT ON UPDATE RESTRICT
 # ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey, DATETIME, create_engine
+from sqlalchemy import Table, MetaData, Column, String, DATETIME
 
 love_record = Table('love_record', MetaData(),
                Column('lid', String(32), primary_key=True),

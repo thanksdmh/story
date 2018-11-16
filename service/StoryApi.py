@@ -29,6 +29,6 @@ class StoryApi(object):
         return True
 
     def getStoyList(self, contentType, pageSize, pageIndex):
-        return self.Session.query(Story).filter(Story.contentType == contentType).order_by(
+        return self.Session.query(Story).filter(Story.content_type == contentType).order_by(
             Story.create_time.desc()).limit(pageSize).offset(
             (pageIndex - 1) * pageSize).all()

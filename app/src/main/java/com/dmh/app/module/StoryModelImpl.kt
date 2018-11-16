@@ -1,12 +1,29 @@
 package com.dmh.app.module
 
+import android.util.Log
+import com.dmh.app.LoginUrl
+import com.dmh.app.net.BaseCallback
+import com.dmh.app.util.OkHttpUtil
 import com.dmh.app.view.bean.Story
+import okhttp3.Call
+import okhttp3.Response
+import org.json.JSONObject
 
 /**
  * Created by dengmaohua on 2018/10/30 16:39.
  */
 class StoryModelImpl : IStoryModel<Story> {
     override fun query(type: Int, listener: QueryListener<Story>) {
+        var obj= JSONObject()
+        obj.put("uid","test")
+        obj.put("pwd","123456")
+        OkHttpUtil.post(LoginUrl,obj.toString(),object : BaseCallback() {
+
+            override fun onResponse(call: Call?, response: Response?) {
+               Log.e("okTest", response?.body()?.string())
+            }
+
+        })
         val t = Thread({
             Thread.sleep(2000)
             println("C 使用 Lambda 表达式:${Thread.currentThread()}")

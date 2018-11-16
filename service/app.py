@@ -19,8 +19,10 @@ def check():
 @app.route('/login', methods=[POST])
 def login():
     if check():
-        uid = request.form.get("uid")
-        pwd = request.form.get("pwd")
+        param = request.data
+        user = json.loads(param)
+        uid = user.get("uid")
+        pwd = user.get("pwd")
 
         if story.login(uid, pwd):
             return str(1)
@@ -63,4 +65,4 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run("10.108.151.228", 5000)
