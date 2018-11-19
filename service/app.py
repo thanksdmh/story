@@ -1,7 +1,7 @@
-import json
+# import json
 
 from flask import Flask, request
-# from pandas import json
+from pandas import json
 
 from StoryApi import StoryApi
 
@@ -65,4 +65,4 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run("10.108.151.228", 5000)
+    app.run(host='0.0.0.0', port=5000)
