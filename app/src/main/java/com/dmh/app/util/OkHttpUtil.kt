@@ -1,6 +1,8 @@
 package com.dmh.app.util
 
 import okhttp3.*
+import java.io.File
+import java.util.*
 
 
 /**
@@ -39,6 +41,28 @@ class OkHttpUtil private constructor() {
             var request=Request.Builder().url(url).post(RequestBody.create( MediaType.parse("text/html; charset=utf-8"), parames)).build()
             var call= getInstance()?.newCall(request)
             call?.enqueue(listener)
+        }
+
+        /*
+         上传文件
+        fileName 文件名，
+        filePath 要上传的文件路径
+        listener 请求回调
+         */
+        fun upload(url:String,fileName:String, filePath:String,listener: Callback){
+            var requestBody =  MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("file", fileName,
+                            RequestBody.create(MediaType.parse("multipart/form-data"), File(filePath)))
+                    .build()
+            var request =  Request.Builder()
+                    .header("Authorization", "Client-ID " + UUID.randomUUID())
+                    .url(url)
+                    .post(requestBody)
+                    .build()
+            var call= getInstance()?.newCall(request)
+            call?.enqueue(listener)
+
         }
 
     }

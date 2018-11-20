@@ -1,5 +1,7 @@
 package com.dmh.app.fragment
 
+import `in`.srain.cube.views.ptr.PtrDefaultHandler
+import `in`.srain.cube.views.ptr.PtrFrameLayout
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -48,6 +50,15 @@ class StoryListFragment : BaseContactFragment<IHomeContact.IHomeView, HomePresen
                 mPresenter?.queryMore()
             }
         })
+        ptr_frame.setPtrHandler(object : PtrDefaultHandler() {
+            override fun onRefreshBegin(frame: PtrFrameLayout?) {
+                mPresenter?.query()
+            }
+
+            override fun checkCanDoRefresh(frame: PtrFrameLayout?, content: View?, header: View?): Boolean {
+                return !recyclerView.canScrollVertically(-1)
+            }
+        })
     }
 
 
@@ -59,12 +70,14 @@ class StoryListFragment : BaseContactFragment<IHomeContact.IHomeView, HomePresen
     override fun onLoadMore(data: ArrayList<Story>) {
         activity.runOnUiThread {
             adapter?.addMore(data)
+            ptr_frame.refreshComplete()
         }
 
     }
 
 
     override fun onLoad(data: ArrayList<Story>) {
+
         adapter = StoryAdapter(data)
         adapter!!.setItemClickListener(object : StoryAdapter.OnItemClickListener {
             override fun onItemClick(item: Story) {
@@ -73,6 +86,7 @@ class StoryListFragment : BaseContactFragment<IHomeContact.IHomeView, HomePresen
         })
         activity.runOnUiThread {
             recyclerView.adapter = adapter
+            ptr_frame.refreshComplete()
         }
     }
 
