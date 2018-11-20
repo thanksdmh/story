@@ -38,6 +38,8 @@ class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<Re
     }
 
     fun showLoadingMore() {
+        if(itemCount>0&&list.get(itemCount-1).type==Story.LOAD_MORE)
+            return
         var story = Story()
         story.title = "加载中"
         story.type = Story.LOAD_MORE
