@@ -15,7 +15,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
         val bundle = intent.getBundleExtra("item")
         val item = bundle.getSerializable("item") as Story
-        detail_tv_title.text = item.title
-        detail_tv_content.text = item.content
+//        detail_tv_title.text = item.title
+        detail_tv_content.text = item.story_context
     }
 }

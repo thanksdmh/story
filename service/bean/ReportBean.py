@@ -8,7 +8,7 @@
 #   KEY `FK_Reference_7` (`sid`),
 #   KEY `FK_Reference_8` (`uid`),
 #   CONSTRAINT `FK_Reference_7` FOREIGN KEY (`sid`) REFERENCES `story` (`sid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-#   CONSTRAINT `FK_Reference_8` FOREIGN KEY (`uid`) REFERENCES `author` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+#   CONSTRAINT `FK_Reference_8` FOREIGN KEY (`uid`) REFERENCES `name` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT
 # ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='举报记录表';
 
 from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey, DATETIME, create_engine

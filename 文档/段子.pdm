@@ -2075,8 +2075,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Table>
 <o:Table Id="o33">
 <a:ObjectID>B2AE6D9D-4658-476D-8588-A9190C2FDFBF</a:ObjectID>
-<a:Name>author</a:Name>
-<a:Code>author</a:Code>
+<a:Name>name</a:Name>
+<a:Code>name</a:Code>
 <a:CreationDate>1541340164</a:CreationDate>
 <a:Creator>issuser</a:Creator>
 <a:ModificationDate>1541901851</a:ModificationDate>

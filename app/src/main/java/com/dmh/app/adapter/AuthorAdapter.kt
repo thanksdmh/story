@@ -8,7 +8,7 @@ import com.dmh.app.adapter.holder.AuthorHolder
 import com.dmh.app.view.bean.Author
 
 /**
- *@author deng
+ *@name deng
  *@date 2018/10/30 0030.
  */
 class AuthorAdapter(private var list: ArrayList<Author>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

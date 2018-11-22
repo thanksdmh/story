@@ -9,7 +9,7 @@
 #   PRIMARY KEY (`lid`),
 #   KEY `FK_Reference_10` (`uid`),
 #   KEY `FK_Reference_9` (`sid`),
-#   CONSTRAINT `FK_Reference_10` FOREIGN KEY (`uid`) REFERENCES `author` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+#   CONSTRAINT `FK_Reference_10` FOREIGN KEY (`uid`) REFERENCES `name` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
 #   CONSTRAINT `FK_Reference_9` FOREIGN KEY (`sid`) REFERENCES `story` (`sid`) ON DELETE RESTRICT ON UPDATE RESTRICT
 # ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

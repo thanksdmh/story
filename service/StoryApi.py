@@ -3,7 +3,8 @@ import uuid
 from sqlalchemy import create_engine, and_
 from sqlalchemy.orm import sessionmaker
 
-from DbOrm import Author, Story
+# from DbOrm import Author, Story
+from bean.StoryBean import Author, Story
 
 
 class StoryApi(object):
@@ -28,7 +29,7 @@ class StoryApi(object):
         self.Session.commit()  # 现此才统一提交，创建数据
         return True
 
-    def getStoyList(self, contentType, pageSize, pageIndex):
-        return self.Session.query(Story).filter(Story.content_type == contentType).order_by(
+    def getStoyList(self, content_type, pageSize, pageIndex):
+        return self.Session.query(Story).filter(Story.content_type == content_type).order_by(
             Story.create_time.desc()).limit(pageSize).offset(
             (pageIndex - 1) * pageSize).all()

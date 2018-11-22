@@ -4,7 +4,7 @@ import com.dmh.app.view.bean.Author
 import java.util.*
 
 /**
- *@author deng
+ *@name deng
  *@date 2018/10/30 0030.
  */
 class AuthorModelImpl : IAuthorModel {

@@ -2,8 +2,10 @@ import json
 
 from flask import Flask, request
 # from pandas import json
-
+from AlchemyEncoder import AlchemyEncoder
 from StoryApi import StoryApi
+from bean.StoryBean import Story
+from model.ClientStory import StoryJson
 
 app = Flask(__name__)
 
@@ -50,11 +52,14 @@ def register():
 @app.route('/getStoryList', methods=[POST])
 def getStoryList():
     if check():
-        type = request.form.get("type")
-        page_size = request.form.get("pageSize")
-        page_index = request.form.get("pageIndex")
-        list = story.getStoyList(type, int(page_size), int(page_index))
-        return json.dumps(list)
+        param = request.data
+        pageInfo = json.loads(param)
+        type = pageInfo.get("type")
+        page_size = pageInfo.get("pageSize")
+        page_index = pageInfo.get("pageIndex")
+        list = story.getStoyList(int(type), int(page_size), int(page_index))
+
+        return json.dumps(list, default=Story.to_json)
     else:
         return "查询错误"
 
@@ -65,4 +70,5 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    # app.run(host='0.0.0.0', port=5000)
+    app.run(host='10.108.151.228', port=5000)

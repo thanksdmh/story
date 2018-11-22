@@ -3,7 +3,7 @@ package com.dmh.app.fragment
 import android.support.v4.app.Fragment
 
 /**
- *@author deng
+ *@name deng
  *@date 2018/10/30 0030.
  */
 class FragmentFactory {

@@ -17,7 +17,7 @@ import com.dmh.app.view.bean.Story
 import kotlinx.android.synthetic.main.fragment_story_list.*
 
 /**
- *@author deng
+ *@name deng
  *@date 2018/10/30 0030.
  */
 class StoryListFragment : BaseContactFragment<IHomeContact.IHomeView, HomePresenter>(), IHomeContact.IHomeView {

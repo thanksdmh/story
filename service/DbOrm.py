@@ -1,11 +1,11 @@
 
-from sqlalchemy.orm import mapper, sessionmaker
-
-from bean.AuthorBean import author, Author
-from bean.StoryBean import stoy, Story
-
-mapper(Author, author)
-mapper(Story, stoy)
+# from sqlalchemy.orm import mapper, sessionmaker
+#
+# from bean.AuthorBean import name, Author
+# from bean.StoryBean import stoy, Story
+#
+# mapper(Author, name)
+# mapper(Story, stoy)
 
 # # 创建与数据库的会话session class ,注意,这里返回给session的是个class,不是实例
 # Session_class = sessionmaker(bind=engine)  # 实例和engine绑定
