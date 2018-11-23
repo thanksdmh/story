@@ -1,6 +1,5 @@
 package com.dmh.app.net
 
-import android.util.Log
 import okhttp3.Call
 import java.io.IOException
 
@@ -10,6 +9,6 @@ import java.io.IOException
  */
 abstract class BaseCallback : okhttp3.Callback {
     override fun onFailure(call: Call?, e: IOException?) {
-        Log.e("okTest", e?.message)
+//        Log.e("okTest")
     }
 }

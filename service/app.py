@@ -2,15 +2,13 @@ import json
 
 from flask import Flask, request
 # from pandas import json
-from AlchemyEncoder import AlchemyEncoder
 from StoryApi import StoryApi
 from bean.StoryBean import Story
-from model.ClientStory import StoryJson
 
 app = Flask(__name__)
 
 POST = "POST"
-story = StoryApi()
+# story = StoryApi()
 
 
 def check():
@@ -25,7 +23,7 @@ def login():
         user = json.loads(param)
         uid = user.get("uid")
         pwd = user.get("pwd")
-
+        story = StoryApi()
         if story.login(uid, pwd):
             return str(1)
         else:
@@ -40,6 +38,7 @@ def register():
         uid = request.form.get("uid")
         pwd = request.form.get("pwd")
         name = request.form.get("name")
+        story = StoryApi()
         if story.register(uid, name, pwd):
             return str(1)
         else:
@@ -57,6 +56,7 @@ def getStoryList():
         type = pageInfo.get("type")
         page_size = pageInfo.get("pageSize")
         page_index = pageInfo.get("pageIndex")
+        story = StoryApi()
         list = story.getStoyList(int(type), int(page_size), int(page_index))
 
         return json.dumps(list, default=Story.to_json)

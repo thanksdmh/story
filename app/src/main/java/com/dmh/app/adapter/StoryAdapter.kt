@@ -96,6 +96,10 @@ class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<Re
                         .into(holder.imageView)
 
             }
+            is SimpleHolder->{
+                holder.tv_author?.text=story.name
+                holder.tv_lover?.text= story.love.toString()
+            }
         }
 
 

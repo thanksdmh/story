@@ -6,7 +6,6 @@ import com.dmh.app.net.BaseCallback
 import com.dmh.app.util.OkHttpUtil
 import com.dmh.app.view.bean.Story
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import okhttp3.Call
 import okhttp3.Response
 import org.json.JSONObject
@@ -23,9 +22,13 @@ class StoryModelImpl : IStoryModel<Story> {
         OkHttpUtil.post(GetStoryList,obj.toString(),object : BaseCallback() {
 
             override fun onResponse(call: Call?, response: Response?) {
-               Log.e("okTest", response?.body()?.string())
-                listener.onSuccess(Gson().fromJson(response?.body()?.string(), object : TypeToken<ArrayList<Story>>() {}
-                        .type))
+                var res=response?.body()?.string()
+               Log.e("okTest", res)
+//                listener.onSuccess(Gson().fromJson(res, object : TypeToken<ArrayList<Story>>() {}.type))
+                var fromJson = Gson().fromJson<Array<Story>>(res, Array<Story>::class.javaObjectType)
+                var list=ArrayList<Story>()
+                list.addAll(fromJson)
+                listener.onSuccess(list)
             }
 
         })
