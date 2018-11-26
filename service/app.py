@@ -1,5 +1,6 @@
 import json
 
+from cffi import lock
 from flask import Flask, request
 # from pandas import json
 from StoryApi import StoryApi
@@ -51,6 +52,7 @@ def register():
 @app.route('/getStoryList', methods=[POST])
 def getStoryList():
     if check():
+        # lock.acquire()
         param = request.data
         pageInfo = json.loads(param)
         type = pageInfo.get("type")
@@ -58,7 +60,7 @@ def getStoryList():
         page_index = pageInfo.get("pageIndex")
         story = StoryApi()
         list = story.getStoyList(int(type), int(page_size), int(page_index))
-
+        # lock.release()
         return json.dumps(list, default=Story.to_json)
     else:
         return "查询错误"

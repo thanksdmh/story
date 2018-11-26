@@ -14,7 +14,10 @@ import com.dmh.app.adapter.StoryAdapter
 import com.dmh.app.contract.HomePresenter
 import com.dmh.app.contract.IHomeContact
 import com.dmh.app.view.bean.Story
+import com.dmh.app.weight.RecycleViewDivider
 import kotlinx.android.synthetic.main.fragment_story_list.*
+
+
 
 /**
  *@name deng
@@ -50,6 +53,7 @@ class StoryListFragment : BaseContactFragment<IHomeContact.IHomeView, HomePresen
                 mPresenter?.queryMore()
             }
         })
+        recyclerView.addItemDecoration(RecycleViewDivider(activity, LinearLayoutManager.VERTICAL, 10, resources.getColor(R.color.colorSplit)))
         ptr_frame.setPtrHandler(object : PtrDefaultHandler() {
             override fun onRefreshBegin(frame: PtrFrameLayout?) {
                 mPresenter?.query()
