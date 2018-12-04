@@ -1,4 +1,5 @@
 import json
+import threading
 
 from cffi import lock
 from flask import Flask, request
@@ -7,9 +8,14 @@ from StoryApi import StoryApi
 from bean.StoryBean import Story
 
 app = Flask(__name__)
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@127.0.0.1:3306/story'
+# mysql+pymysql://root:123456@localhost/story
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+# 查询时会显示原始SQL语句
+app.config['SQLALCHEMY_ECHO'] = True
 POST = "POST"
-# story = StoryApi()
+
+
 
 
 def check():
@@ -52,16 +58,13 @@ def register():
 @app.route('/getStoryList', methods=[POST])
 def getStoryList():
     if check():
-        # lock.acquire()
         param = request.data
         pageInfo = json.loads(param)
         type = pageInfo.get("type")
         page_size = pageInfo.get("pageSize")
         page_index = pageInfo.get("pageIndex")
         story = StoryApi()
-        list = story.getStoyList(int(type), int(page_size), int(page_index))
-        # lock.release()
-        return json.dumps(list, default=Story.to_json)
+        return story.getStoyList(int(type), int(page_size), int(page_index))
     else:
         return "查询错误"
 
@@ -70,7 +73,7 @@ def getStoryList():
 def hello_world():
     return 'Hello World!'
 
-
-if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=5000)
-    app.run(host='10.108.151.228', port=5000)
+#
+# if __name__ == '__main__':
+#     # app.run(host='0.0.0.0', port=5000)
+#     app.run(host='10.108.151.228', port=5000, threaded=True)

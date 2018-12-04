@@ -1,8 +1,17 @@
+# import sqlalchemy as SQLAlchemy
+from flask import Flask
+
+from flask_sqlalchemy import SQLAlchemy
+
 from sqlalchemy import Column, Integer, String, ForeignKey, DATETIME
 from sqlalchemy.ext.declarative import declarative_base
+# from app import app
 from sqlalchemy.orm import relationship
 
 Base = declarative_base()
+app = Flask(__name__)
+
+db = SQLAlchemy(app)
 
 
 class Author(Base):
@@ -20,22 +29,23 @@ class Author(Base):
     # storys = relationship('Story', backref="Author",cascade='all')
 
 
-class Story(Base):
+class Story(db.Model):
     __tablename__ = "story"
-    sid = Column(String(36), primary_key=True)
-    uid = Column(String(36), ForeignKey('author.uid'))
-    story_context = Column(String(2000))
-    content_type = Column(Integer)
-    create_time = Column(DATETIME)
-    time = Column(Integer)
-    love = Column(Integer)
-    author = relationship('Author')
+    sid = db.Column(String(36), primary_key=True)
+    uid = db.Column(String(36), ForeignKey('author.uid'))
+    story_context = db.Column(String(2000))
+    content_type = db.Column(Integer)
+    create_time = db.Column(DATETIME)
+    time = db.Column(Integer)
+    love = db.Column(Integer)
+
+    # author = db.relationship('Author')
 
     def to_json(self):
         return {
             "sid": self.sid,
             "uid": self.uid,
-            "name": self.author.name,
+            "name": "dmh",
             "story_context": self.story_context,
             "content_type": self.content_type,
             "time": self.time,
