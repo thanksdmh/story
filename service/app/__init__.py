@@ -18,6 +18,9 @@ def create_app(config_name):
     app = Flask(__name__)
     # 初始化app配置
     app.config.from_object(config[config_name])
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    # 查询时会显示原始SQL语句
+    app.config['SQLALCHEMY_ECHO'] = True
     config[config_name].init_app(app)
     # 扩展应用初始化
     bootstrap.init_app(app)

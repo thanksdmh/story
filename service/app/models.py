@@ -1,6 +1,7 @@
 from . import db, login_manager
 
 
+# 用户表
 class Author(db.Model):
     __tablename__ = "author"
     uid = db.Column(db.String(32), primary_key=True)
@@ -9,13 +10,25 @@ class Author(db.Model):
     follow = db.Column(db.Integer)
     time = db.Column(db.DATETIME)
     opid = db.Column(db.String(50))
-    header =db. Column(db.String(1000))
+    header = db.Column(db.String(1000))
     pwd = db.Column(db.String(100))
     email = db.Column(db.String(100))
     phone = db.Column(db.String(15))
-    # storys = relationship('Story', backref="Author",cascade='all')
+    storys = db.relationship('Story', backref="Author", cascade='all')
 
 
+# 评论表
+class Comment(db.Model):
+    __tablename__ = 'comment'
+
+    cid = db.Column(db.String(32), primary_key=True)
+    sid = db.Column(db.String(32))
+    uid = db.Column(db.String(32))
+    time = db.Column(db.DATETIME)
+    detail = db.Column(db.String(1000))
+
+
+# 段子表
 class Story(db.Model):
     __tablename__ = "story"
     sid = db.Column(db.String(36), primary_key=True)
@@ -32,10 +45,46 @@ class Story(db.Model):
         return {
             "sid": self.sid,
             "uid": self.uid,
-            "name": "dmh",
+            "name": self.Author.name,
             "story_context": self.story_context,
             "content_type": self.content_type,
             "time": self.time,
             "love": self.love,
 
         }
+
+
+# 好友关系表
+class FriendShip(db.Model):
+    __tablename__ = 'frend_ship'
+
+    fid = db.Column(db.String(32), primary_key=True)
+    uid = db.Column(db.String(32))
+    fuid = db.Column(db.String(32))
+
+
+# 图片表
+class Image(db.Model):
+    __tablename__ = 'image'
+    id = db.Column(db.String(32), primary_key=True)
+    sid = db.Column(db.String(32))
+    path = db.Column(db.String(32))
+
+
+# 举报表
+class Report(db.Model):
+    __tablename__ = 'report'
+    rid = db.Column(db.String(32), primary_key=True)
+    sid = db.Column(db.String(32))
+    uid = db.Column(db.String(32))
+    time = db.Column(db.DATETIME)
+    reson = db.Column(db.DATETIME)
+
+
+# 点赞记录表
+class LoveRecord(db.Model):
+    __tablename__ = 'love_record'
+    lid = db.Column(db.String(32), primary_key=True)
+    sid = db.Column(db.String(32))
+    uid = db.Column(db.String(32))
+    time = db.Column(db.DATETIME)
