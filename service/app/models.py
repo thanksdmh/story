@@ -4,15 +4,25 @@ from . import db, login_manager
 # 用户表
 class Author(db.Model):
     __tablename__ = "author"
+    # id号
     uid = db.Column(db.String(32), primary_key=True)
+    # 用户昵称
     name = db.Column(db.String(50))
+    # 发布的作品数
     works = db.Column(db.Integer)
+    # 粉丝数目
     follow = db.Column(db.Integer)
-    time = db.Column(db.DATETIME)
+    # 注册时间
+    create_time = db.Column(db.DATETIME)
+    # 第三方授权id
     opid = db.Column(db.String(50))
+    # 头像地址
     header = db.Column(db.String(1000))
+    # 密码
     pwd = db.Column(db.String(100))
+    # 邮箱
     email = db.Column(db.String(100))
+    # 电话
     phone = db.Column(db.String(15))
     storys = db.relationship('Story', backref="Author", cascade='all')
 
@@ -20,71 +30,86 @@ class Author(db.Model):
 # 评论表
 class Comment(db.Model):
     __tablename__ = 'comment'
-
-    cid = db.Column(db.String(32), primary_key=True)
-    sid = db.Column(db.String(32))
-    uid = db.Column(db.String(32))
-    time = db.Column(db.DATETIME)
+    id = db.Column(db.Integer, primary_key=True)
+    sid = db.Column(db.String(32), db.ForeignKey('Story.id'))
+    uid = db.Column(db.String(32), db.ForeignKey('author.uid'))
+    create_time = db.Column(db.DATETIME)
     detail = db.Column(db.String(1000))
 
 
 # 段子表
 class Story(db.Model):
     __tablename__ = "story"
-    sid = db.Column(db.String(36), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    # 用户id
     uid = db.Column(db.String(36), db.ForeignKey('author.uid'))
-    story_context = db.Column(db.String(2000))
-    content_type = db.Column(db.Integer)
+    # 内容
+    content = db.Column(db.TEXT)
+    # 类型
+    type = db.Column(db.Integer)
+    # 发布日期
     create_time = db.Column(db.DATETIME)
-    time = db.Column(db.Integer)
+    # 被举报次数
+    report_time = db.Column(db.Integer)
+    # 被点赞次数
     love = db.Column(db.Integer)
+    # 状态 1 显示，0 不显示
+    status = db.Column(db.Integer)
 
     # author = db.relationship('Author')
 
     def to_json(self):
         return {
-            "sid": self.sid,
+            "id": self.id,
             "uid": self.uid,
             "name": self.Author.name,
-            "story_context": self.story_context,
-            "content_type": self.content_type,
-            "time": self.time,
-            "love": self.love,
-
+            "content": self.content,
+            "type": self.type,
+            "create_time": self.create_time,
+            "love": self.love
         }
 
 
 # 好友关系表
 class FriendShip(db.Model):
     __tablename__ = 'frend_ship'
-
-    fid = db.Column(db.String(32), primary_key=True)
-    uid = db.Column(db.String(32))
-    fuid = db.Column(db.String(32))
+    id = db.Column(db.Integer, primary_key=True)
+    # 用户
+    uid = db.Column(db.String(32), db.ForeignKey('author.uid'))
+    # 好友ID
+    fid = db.Column(db.String(32), db.ForeignKey('author.uid'))
 
 
 # 图片表
 class Image(db.Model):
     __tablename__ = 'image'
-    id = db.Column(db.String(32), primary_key=True)
-    sid = db.Column(db.String(32))
-    path = db.Column(db.String(32))
+    id = db.Column(db.Integer, primary_key=True)
+    # 故事ID
+    sid = db.Column(db.Integer, db.ForeignKey('story.id'))
+    path = db.Column(db.TEXT)
 
 
 # 举报表
 class Report(db.Model):
     __tablename__ = 'report'
-    rid = db.Column(db.String(32), primary_key=True)
-    sid = db.Column(db.String(32))
-    uid = db.Column(db.String(32))
-    time = db.Column(db.DATETIME)
-    reson = db.Column(db.DATETIME)
+    id = db.Column(db.Integer, primary_key=True)
+    # 故事ID
+    sid = db.Column(db.Integer, db.ForeignKey('story.id'))
+    # 用户ID
+    uid = db.Column(db.String(32), db.ForeignKey('author.uid'))
+    # 举报时间
+    create_time = db.Column(db.DATETIME)
+    # 举报原因
+    reason = db.Column(db.TEXT)
 
 
 # 点赞记录表
 class LoveRecord(db.Model):
     __tablename__ = 'love_record'
-    lid = db.Column(db.String(32), primary_key=True)
-    sid = db.Column(db.String(32))
-    uid = db.Column(db.String(32))
-    time = db.Column(db.DATETIME)
+    id = db.Column(db.Integer, primary_key=True)
+    # 故事id
+    sid = db.Column(db.Integer, db.ForeignKey('story.id'))
+    # 点赞用户ID
+    uid = db.Column(db.String(32), db.ForeignKey('author.uid'))
+    # 点赞时间
+    create_time = db.Column(db.DATETIME)
