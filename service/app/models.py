@@ -24,7 +24,7 @@ class Author(db.Model):
     email = db.Column(db.String(100))
     # 电话
     phone = db.Column(db.String(15))
-    storys = db.relationship('Story', backref="Author", cascade='all')
+    # storys = db.relationship('Story', backref="Author", cascade='all')
 
 
 # 评论表
@@ -40,6 +40,7 @@ class Comment(db.Model):
 # 段子表
 class Story(db.Model):
     __tablename__ = "story"
+
     id = db.Column(db.Integer, primary_key=True)
     # 用户id
     uid = db.Column(db.String(36), db.ForeignKey('author.uid'))
@@ -48,24 +49,26 @@ class Story(db.Model):
     # 类型
     type = db.Column(db.Integer)
     # 发布日期
-    create_time = db.Column(db.DATETIME)
+    create_time = db.Column(db.String)
     # 被举报次数
     report_time = db.Column(db.Integer)
     # 被点赞次数
     love = db.Column(db.Integer)
     # 状态 1 显示，0 不显示
     status = db.Column(db.Integer)
+    # 图片或者视频
+    img = db.Column(db.TEXT)
 
-    # author = db.relationship('Author')
+    author = db.relationship('Author')
 
     def to_json(self):
         return {
             "id": self.id,
             "uid": self.uid,
-            "name": self.Author.name,
+            "name": self.author.name,
             "content": self.content,
             "type": self.type,
-            "create_time": self.create_time,
+            "img": self.img,
             "love": self.love
         }
 

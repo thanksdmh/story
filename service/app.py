@@ -5,14 +5,13 @@ from cffi import lock
 from flask import Flask, request
 # from pandas import json
 from StoryApi import StoryApi
-from bean.StoryBean import Story
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@127.0.0.1:3306/story'
-# mysql+pymysql://root:123456@localhost/story
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-# 查询时会显示原始SQL语句
-app.config['SQLALCHEMY_ECHO'] = True
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@127.0.0.1:3306/story'
+# # mysql+pymysql://root:123456@localhost/story
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+# # 查询时会显示原始SQL语句
+# app.config['SQLALCHEMY_ECHO'] = True
 POST = "POST"
 
 
@@ -74,6 +73,6 @@ def hello_world():
     return 'Hello World!'
 
 #
-# if __name__ == '__main__':
-#     # app.run(host='0.0.0.0', port=5000)
-#     app.run(host='10.108.151.228', port=5000, threaded=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+    # app.run(host='10.108.151.228', port=5000, threaded=True)
