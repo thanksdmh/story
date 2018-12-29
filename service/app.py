@@ -57,13 +57,16 @@ def register():
 @app.route('/getStoryList', methods=[POST])
 def getStoryList():
     if check():
-        param = request.data
-        pageInfo = json.loads(param)
-        type = pageInfo.get("type")
-        page_size = pageInfo.get("pageSize")
-        page_index = pageInfo.get("pageIndex")
+        # param = request.data
+        # pageInfo = json.loads(param)
+        # type = pageInfo.get("type")
+        # page_size = pageInfo.get("pageSize")
+        # page_index = pageInfo.get("pageIndex")
+        type = int(request.headers.get("type"))
+        page_size = int(request.headers.get("pageSize"))
+        page_index = int(request.headers.get("pageIndex"))
         story = StoryApi()
-        return story.getStoyList(int(type), int(page_size), int(page_index))
+        return story.getStoyList(type, page_size, page_index)
     else:
         return "查询错误"
 

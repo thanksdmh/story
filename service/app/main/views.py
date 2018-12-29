@@ -13,11 +13,14 @@ def check():
 @main.route('/getStoryList', methods=['POST', 'GET'])
 def get_story():
     if check():
-        param = request.data
-        page_info = json.loads(param)
-        type = page_info.get("type")
-        page_size = int(page_info.get("pageSize"))
-        page_index = int(page_info.get("pageIndex"))
+        # param = request.data
+        # page_info = json.loads(param.decode("utf-8"))
+        # page_info.get("type")
+        # page_size = int(page_info.get("pageSize"))
+        # page_index = int(page_info.get("pageIndex"))
+        type =request.headers.get("type")
+        page_size = int(request.headers.get("pageSize"))
+        page_index = int(request.headers.get("pageIndex"))
         # paginate分页查询
         # result = Story.query.filter_by(content_type=type).paginate(page_index, page_size, False)
         # return json.dumps(result.items, default=Story.to_json)

@@ -10,7 +10,7 @@ from app.models import Story
 
 
 class StoryApi(object):
-    engine = create_engine("mysql+pymysql://root:123456@localhost/demo",
+    engine = create_engine("mysql+pymysql://root:112233@18.216.122.19:53306/duanzi",
                            max_overflow=0,  # 超过连接池大小外最多创建的连接
                            pool_size=5,  # 连接池大小
                            pool_timeout=30,  # 池中没有线程时，最多等待的时间，超时报错，默认30秒
