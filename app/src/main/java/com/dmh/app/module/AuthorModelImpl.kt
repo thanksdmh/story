@@ -8,7 +8,9 @@ import java.util.*
  *@date 2018/10/30 0030.
  */
 class AuthorModelImpl : IAuthorModel {
-    override fun query(type: Int, listener: QueryListener<Author>) {
+
+
+    override fun query(type: Int, pageSize: Int, PageIndex: Int,listener: QueryListener<Author>) {
         val t = Thread({
             Thread.sleep(2000)
             println("C 使用 Lambda 表达式:${Thread.currentThread()}")

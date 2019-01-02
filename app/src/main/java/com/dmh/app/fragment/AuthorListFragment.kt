@@ -66,7 +66,7 @@ class AuthorListFragment : BaseContactFragment<IFavorContact.IFavorView, FavorPr
         return mtype
     }
 
-    public var mtype: Int = 0
+    public var mtype: Int = 1
         get() = field
         set(value) {
             field = value

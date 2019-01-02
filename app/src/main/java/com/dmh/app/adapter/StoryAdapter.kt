@@ -80,7 +80,7 @@ class StoryAdapter(private var list: ArrayList<Story>) : RecyclerView.Adapter<Re
         if (holder is BaseHolder) {
             holder.titleView!!.text = story.title
             if (holder.contentView != null) {
-                holder.contentView!!.text = story.story_context
+                holder.contentView!!.text = story.content
             }
             holder.itemView.setOnClickListener({
                 itemClickListener?.onItemClick(story)

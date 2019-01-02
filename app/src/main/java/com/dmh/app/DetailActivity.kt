@@ -16,6 +16,6 @@ class DetailActivity : AppCompatActivity() {
         val bundle = intent.getBundleExtra("item")
         val item = bundle.getSerializable("item") as Story
 //        detail_tv_title.text = item.title
-        detail_tv_content.text = item.story_context
+        detail_tv_content.text = item.content
     }
 }

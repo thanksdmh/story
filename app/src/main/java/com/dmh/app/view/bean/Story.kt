@@ -24,19 +24,20 @@ class Story : Serializable {
     var type: Int = 0
     //标题
     var title: String? = ""
-    var sid:String?=""
-    var uid:String?=""
+    var sid: String? = ""
+    var uid: String? = ""
     //作者
     var name: String? = ""
     //内容
-    var story_context: String? = ""
-//    /*简介*/
+    var content: String? = ""
+    //    /*简介*/
 //    var introduce: String? = ""
+    var img: String? = ""
     /*图片地址*/
     var picUrlList: ArrayList<String>? = null
 
-    var time:Int?=0
-    var love:Int?=0
+    var time: Int? = 0
+    var love: Int? = 0
 
     /*内容类型 1 幽默 2 冷笑话 3 故事 4 散文 等等*/
     var content_type: Int = 0

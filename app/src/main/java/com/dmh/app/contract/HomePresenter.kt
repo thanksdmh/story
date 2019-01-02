@@ -11,10 +11,11 @@ import com.dmh.app.view.bean.Story
 class HomePresenter(view: IHomeContact.IHomeView) : BasePresenter<IHomeContact.IHomeView>(), IHomeContact {
     private val mView = view
     private val mStoryModel = StoryModelImpl()
-
+    private val mPageSize = 10
+    private var mPageIndex = 1
     override fun queryMore() {
-
-        mStoryModel.query(mView.getType(), object : QueryListener<Story> {
+        mPageIndex++
+        mStoryModel.query(mView.getType(), mPageSize, mPageIndex, object : QueryListener<Story> {
             override fun onSuccess(data: ArrayList<Story>) {
                 mView.onLoadMore(data)
 
@@ -30,7 +31,8 @@ class HomePresenter(view: IHomeContact.IHomeView) : BasePresenter<IHomeContact.I
 
 
     override fun query() {
-        mStoryModel.query(mView.getType(), object : QueryListener<Story> {
+        mPageIndex = 1
+        mStoryModel.query(mView.getType(), mPageSize, mPageIndex, object : QueryListener<Story> {
             override fun onSuccess(data: ArrayList<Story>) {
                 mView.onLoad(data)
             }

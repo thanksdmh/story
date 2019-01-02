@@ -2004,8 +2004,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o41">
 <a:ObjectID>BC12D447-0F9E-432C-B424-310CF5CF11C1</a:ObjectID>
-<a:Name>story_context</a:Name>
-<a:Code>story_context</a:Code>
+<a:Name>content</a:Name>
+<a:Code>content</a:Code>
 <a:CreationDate>1541340172</a:CreationDate>
 <a:Creator>issuser</a:Creator>
 <a:ModificationDate>1541926529</a:ModificationDate>

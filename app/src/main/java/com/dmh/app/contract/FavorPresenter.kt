@@ -10,9 +10,12 @@ import com.dmh.app.view.bean.Author
  */
 class FavorPresenter(view: IFavorContact.IFavorView) : BasePresenter<IFavorContact.IFavorView>(), IFavorContact {
     private val mView = view
+    private val mPageSize = 10
+    private var mPageIndex = 1
     var mModel: IAuthorModel = AuthorModelImpl()
     override fun queryMore() {
-        mModel.query(mView.getType(), object : QueryListener<Author> {
+        mPageIndex++
+        mModel.query(mView.getType(), mPageSize, mPageIndex, object : QueryListener<Author> {
             override fun onSuccess(data: ArrayList<Author>) {
                 mView.onLoadMore(data)
             }
@@ -23,7 +26,8 @@ class FavorPresenter(view: IFavorContact.IFavorView) : BasePresenter<IFavorConta
     }
 
     override fun query() {
-        mModel.query(mView.getType(), object : QueryListener<Author> {
+        mPageIndex = 1
+        mModel.query(mView.getType(), mPageSize, mPageIndex, object : QueryListener<Author> {
             override fun onSuccess(data: ArrayList<Author>) {
                 mView.onLoad(data)
             }

@@ -18,7 +18,6 @@ import com.dmh.app.weight.RecycleViewDivider
 import kotlinx.android.synthetic.main.fragment_story_list.*
 
 
-
 /**
  *@name deng
  *@date 2018/10/30 0030.
@@ -29,7 +28,7 @@ class StoryListFragment : BaseContactFragment<IHomeContact.IHomeView, HomePresen
     }
 
     private var adapter: StoryAdapter? = null
-    public var mtype: Int = 0
+    var mtype: Int = 1
         set(value) {
             field = value
         }

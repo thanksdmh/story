@@ -14,19 +14,26 @@ import org.json.JSONObject
  * Created by dengmaohua on 2018/10/30 16:39.
  */
 class StoryModelImpl : IStoryModel<Story> {
-    override fun query(type: Int, listener: QueryListener<Story>) {
-        var obj= JSONObject()
-        obj.put("type","1")
-        obj.put("pageSize","10")
-        obj.put("pageIndex","1")
-        OkHttpUtil.post(GetStoryList,obj.toString(),object : BaseCallback() {
+    override fun query(type: Int, pageSize: Int, PageIndex: Int, listener: QueryListener<Story>) {
+        var obj = JSONObject()
+        obj.put("type", type)
+        obj.put("pageSize", pageSize)
+        obj.put("pageIndex", PageIndex)
+        var params = HashMap<String, String>()
+        params.put("type", type.toString())
+        params.put("pageSize", pageSize.toString())
+        params.put("pageIndex", PageIndex.toString())
+
+
+
+        OkHttpUtil.post(GetStoryList, params, object : BaseCallback() {
 
             override fun onResponse(call: Call?, response: Response?) {
-                var res=response?.body()?.string()
-               Log.e("okTest", res)
+                var res = response?.body()?.string()
+                Log.e("okTest", res)
 //                listener.onSuccess(Gson().fromJson(res, object : TypeToken<ArrayList<Story>>() {}.type))
                 var fromJson = Gson().fromJson<Array<Story>>(res, Array<Story>::class.javaObjectType)
-                var list=ArrayList<Story>()
+                var list = ArrayList<Story>()
                 list.addAll(fromJson)
                 listener.onSuccess(list)
             }
@@ -46,7 +53,7 @@ class StoryModelImpl : IStoryModel<Story> {
 //                    story.picUrlList!!.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540233941779&di=4dbaa17b29f3e66b63624fafde0583d3&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F060828381f30e92483987f3746086e061d95f7fc.jpg")
 //
 //                }
-//                story.story_context = "公司招聘新工人，小李前来应聘。\n" +
+//                story.content = "公司招聘新工人，小李前来应聘。\n" +
 //                        "招办主任：想到我们公司来工作，必须肯吃苦，你能吃苦吗？\n" +
 //                        "小李：我绝对能吃苦。\n" +
 //                        "招办主任：你都能吃怎样的苦？\n" +
