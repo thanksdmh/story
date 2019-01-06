@@ -1,0 +1,9 @@
+https://www.cnblogs.com/Ray-liang/p/4837850.html
+
+https://www.cnblogs.com/freely/p/8022923.html
+
+https://www.58jb.com/html/175.html
+
+gunicorn -w 4 -b 127.0.0.1:8080 wsgi:application
+
+docker run -p 3306:3306 --name mysql02 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
