@@ -3,11 +3,11 @@ ext {
 
     // Android 扩展配置
     android = [
-            versionCode      : 8, // 版本号
+            versionCode      : 1, // 版本号
             compileSdkVersion: 28,
             targetSdkVersion : 28,
             minSdkVersion    : 17,
-            supportVersion   : '28.0.0'
+            supportVersion   : '26.1.0'
     ]
 
     // 依赖配置
